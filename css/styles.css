@@ -1,0 +1,119 @@
+:root {
+  --color-dark: black;
+  --color-light: white;
+  --color-background: #c2d2e6;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: System-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.container {
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 40px;
+}
+
+.dropdawn-menu {
+  position: relative;
+}
+
+.dropdawn-menu__title {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  cursor: pointer;
+
+  display: block;
+  max-width: 360px;
+  width: 100%;
+  padding: 10px 35px 10px 20px;
+  position: relative;
+
+  background-color: var(--color-light);
+  box-shadow: 0px 4px 12px 0px var(--color-dark);
+  border: 1px solid var(--color-dark);
+  border-radius: 8px;
+
+  transition: 0.5s;
+}
+
+.dropdawn-menu__title::after {
+  content: "";
+
+  position: absolute;
+  top: 45%;
+  right: 15px;
+
+  border: 7px solid transparent;
+  border-top-color: var(--color-dark);
+
+  pointer-events: none;
+  transition: all ease-in 0.3s;
+}
+
+.dropdawn-menu__title:hover {
+  background-color: var(--color-background);
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.dropdawn-menu__title:hover.dropdawn-menu__title::after {
+  transform: rotateX(180deg);
+  top: 30%;
+}
+
+.dropdawn-menu__list {
+  list-style-type: none;
+
+  max-width: 360px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  background-color: var(--color-light);
+  border: 1px solid var(--color-dark);
+  border-top: 0;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+  box-shadow: 0px 4px 12px 0px var(--color-dark);
+
+  transition: all 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 100;
+}
+
+.dropdawn-menu__item {
+  text-align: left;
+  margin: 0;
+  padding: 10px 0 10px 20px;
+  border-top: 1px solid var(--color-dark);
+}
+
+.dropdawn-menu__item:first-child {
+  border-top: 0;
+}
+
+.dropdawn-menu__item:hover {
+  background-color: var(--color-background);
+}
+
+.dropdawn-menu:hover .dropdawn-menu__list {
+  opacity: 1;
+  visibility: visible;
+}
