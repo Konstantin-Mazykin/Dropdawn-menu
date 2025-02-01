@@ -11,7 +11,7 @@ function closeMenu() {
   menuList.classList.remove("open-menu");
 }
 
-function getValue() {
+function replacingValue() {
   menuTitle.innerText = this.innerText;
   input.value = this.dataset.value;
   closeMenu();
@@ -20,5 +20,5 @@ function getValue() {
 menuTitle.addEventListener("click", openMenu);
 
 items.forEach((listItem) => {
-  listItem.addEventListener("click", getValue);
+  listItem.addEventListener("click", replacingValue);
 });
