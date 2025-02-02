@@ -5,14 +5,24 @@ const input = document.querySelector(".dropdawn-menu__input");
 
 function openMenu() {
   menuList.classList.toggle("open-menu");
+  menuTitle.classList.toggle("title-pressed");
 }
 
 function closeMenu() {
   menuList.classList.remove("open-menu");
+  menuTitle.classList.remove("title-pressed");
 }
 
-function replacingValue() {
+function clearItemSelection() {
+  items.forEach((item) => {
+    item.classList.remove("selected-item");
+  });
+}
+
+function processingSelectedItem() {
   menuTitle.innerText = this.innerText;
+  clearItemSelection();
+  this.classList.add("selected-item");
   input.value = this.dataset.value;
   closeMenu();
 }
@@ -20,5 +30,5 @@ function replacingValue() {
 menuTitle.addEventListener("click", openMenu);
 
 items.forEach((listItem) => {
-  listItem.addEventListener("click", replacingValue);
+  listItem.addEventListener("click", processingSelectedItem);
 });
