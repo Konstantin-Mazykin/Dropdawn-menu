@@ -9,26 +9,46 @@ dropdawns.forEach((dropdawnWrapper) => {
   function openMenu() {
     menuList.classList.toggle("open-menu");
     menuTitle.classList.toggle("title-pressed");
+
+    if (menuTitle.classList.contains("title-pressed")) {
+      menuTitle.setAttribute("aria-expanded", "true");
+      menuList.setAttribute("aria-hidden", "false");
+    } else {
+      menuTitle.setAttribute("aria-expanded", "false");
+      menuList.setAttribute("aria-hidden", "true");
+    }
   }
 
   function processingSelectedItem(evant) {
     evant.stopPropagation();
-    menuTitle.innerText = this.innerText;
-    clearItemSelection();
-    this.classList.add("selected-item");
-    dropdawnInput.value = this.dataset.value;
+    menuTitle.innerText = evant.target.innerText;
+    markItem(evant.target);
+    gettingValue(evant.target);
     closeDropdawnMenu();
+  }
+
+  function markItem(item) {
+    clearItemSelection();
+    item.classList.add("selected-item");
+    item.setAttribute("aria-selected", "true");
   }
 
   function clearItemSelection() {
     listItems.forEach((item) => {
       item.classList.remove("selected-item");
+      item.setAttribute("aria-selected", "false");
     });
+  }
+
+  function gettingValue(item) {
+    dropdawnInput.value = item.dataset.value;
   }
 
   function closeDropdawnMenu() {
     menuList.classList.remove("open-menu");
     menuTitle.classList.remove("title-pressed");
+    menuTitle.setAttribute("aria-expanded", "false");
+    menuList.setAttribute("aria-hidden", "true");
   }
 
   function clickOutsideDropdawn(evant) {
@@ -38,7 +58,10 @@ dropdawns.forEach((dropdawnWrapper) => {
   }
 
   function keyboardActions(evant) {
-    if (evant.key === "Tab" || evant.key === "Escape") {
+    if (evant.key === "Enter") {
+      processingSelectedItem(evant);
+    }
+    if (evant.key === "Escape") {
       closeDropdawnMenu();
     }
   }
@@ -51,5 +74,5 @@ dropdawns.forEach((dropdawnWrapper) => {
 
   document.addEventListener("click", clickOutsideDropdawn);
 
-  document.addEventListener("keydown", keyboardActions);
+  dropdawnWrapper.addEventListener("keydown", keyboardActions);
 });
