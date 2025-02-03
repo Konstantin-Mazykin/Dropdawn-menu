@@ -1,11 +1,20 @@
 const menuTitle = document.querySelector(".dropdawn-menu__title");
 const menuList = document.querySelector(".dropdawn-menu__list");
-const items = document.querySelectorAll(".dropdawn-menu__item");
-const input = document.querySelector(".dropdawn-menu__input");
+const listItems = document.querySelectorAll(".dropdawn-menu__item");
+const dropdawnInput = document.querySelector(".dropdawn-menu__input");
 
 function openMenu() {
   menuList.classList.toggle("open-menu");
   menuTitle.classList.toggle("title-pressed");
+}
+
+function processingSelectedItem(evant) {
+  evant.stopPropagation();
+  menuTitle.innerText = this.innerText;
+  clearItemSelection();
+  this.classList.add("selected-item");
+  dropdawnInput.value = this.dataset.value;
+  closeMenu();
 }
 
 function closeMenu() {
@@ -13,22 +22,30 @@ function closeMenu() {
   menuTitle.classList.remove("title-pressed");
 }
 
+function clickOutsideDropdawn(evant) {
+  if (evant.target !== menuTitle) {
+    closeMenu();
+  }
+}
+
+function keyboardActions(evant) {
+  if (evant.key === "Tab" || evant.key === "Escape") {
+    closeMenu();
+  }
+}
+
 function clearItemSelection() {
-  items.forEach((item) => {
+  listItems.forEach((item) => {
     item.classList.remove("selected-item");
   });
 }
 
-function processingSelectedItem() {
-  menuTitle.innerText = this.innerText;
-  clearItemSelection();
-  this.classList.add("selected-item");
-  input.value = this.dataset.value;
-  closeMenu();
-}
-
 menuTitle.addEventListener("click", openMenu);
 
-items.forEach((listItem) => {
+listItems.forEach((listItem) => {
   listItem.addEventListener("click", processingSelectedItem);
 });
+
+document.addEventListener("click", clickOutsideDropdawn);
+
+document.addEventListener("keydown", keyboardActions);

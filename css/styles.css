@@ -41,7 +41,7 @@ body {
   position: relative;
 
   background-color: var(--color-light);
-  box-shadow: 0px 4px 12px 0px var(--color-dark);
+  box-shadow: 0px 4px 8px 0px var(--color-dark);
   border: 1px solid var(--color-dark);
   border-radius: 8px;
 
@@ -87,7 +87,7 @@ body {
 
   background-color: var(--color-light);
   border-radius: 0 0 8px 8px;
-  box-shadow: 0px 4px 12px 0px var(--color-dark);
+  box-shadow: 0px 4px 8px 0px var(--color-dark);
 
   transition: all 0.3s ease;
   z-index: 100;
