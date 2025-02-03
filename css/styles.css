@@ -67,17 +67,11 @@ body {
   background-color: var(--color-background);
 }
 
-/* 
-.dropdawn-menu__title:hover.dropdawn-menu__title::after {
-  transform: rotateX(180deg);
-  top: 30%;
-} */
-
 .dropdawn-menu__list {
   list-style-type: none;
-
   max-width: 360px;
   width: 100%;
+  height: 0;
   margin: 0;
   padding: 0;
 
@@ -89,7 +83,8 @@ body {
   border-radius: 0 0 8px 8px;
   box-shadow: 0px 4px 8px 0px var(--color-dark);
 
-  transition: all 0.3s ease;
+  transition: opacity 0.5s ease, height 0.5s linear;
+
   z-index: 100;
 
   opacity: 0;
@@ -116,6 +111,7 @@ body {
 
 .dropdawn-menu__input {
   display: none;
+  margin-left: 400px;
 }
 
 .dropdawn-menu__item:hover {
@@ -127,6 +123,7 @@ body {
 }
 
 .open-menu {
+  height: auto;
   opacity: 1;
   visibility: visible;
 }
@@ -134,4 +131,9 @@ body {
 .title-pressed {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.title-pressed.dropdawn-menu__title::after {
+  transform: rotateX(180deg);
+  top: 30%;
 }
