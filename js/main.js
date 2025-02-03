@@ -13,11 +13,9 @@ dropdawns.forEach((dropdawnWrapper) => {
     if (menuTitle.classList.contains("title-pressed")) {
       menuTitle.setAttribute("aria-expanded", "true");
       menuList.setAttribute("aria-hidden", "false");
-      listItems.forEach((item) => item.setAttribute("aria-selected", "true"));
     } else {
       menuTitle.setAttribute("aria-expanded", "false");
       menuList.setAttribute("aria-hidden", "true");
-      listItems.forEach((item) => item.setAttribute("aria-selected", "false"));
     }
   }
 
@@ -51,7 +49,6 @@ dropdawns.forEach((dropdawnWrapper) => {
     menuTitle.classList.remove("title-pressed");
     menuTitle.setAttribute("aria-expanded", "false");
     menuList.setAttribute("aria-hidden", "true");
-    listItems.forEach((item) => item.setAttribute("aria-selected", "false"));
   }
 
   function clickOutsideDropdawn(evant) {
