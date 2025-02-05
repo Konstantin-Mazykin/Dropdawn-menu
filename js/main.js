@@ -30,13 +30,13 @@ dropdawns.forEach((dropdawnWrapper) => {
   function markItem(item) {
     clearItemSelection();
     item.classList.add("selected-item");
-    item.setAttribute("aria-selected", "true");
+    item.setAttribute("aria-checked", "true");
   }
 
   function clearItemSelection() {
     listItems.forEach((item) => {
       item.classList.remove("selected-item");
-      item.setAttribute("aria-selected", "false");
+      item.setAttribute("aria-checked", "false");
     });
   }
 
