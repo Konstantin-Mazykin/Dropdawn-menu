@@ -6,10 +6,17 @@ dropdawns.forEach((dropdawnWrapper) => {
   const listItems = menuList.querySelectorAll(".dropdawn-menu__item");
   const dropdawnInput = dropdawnWrapper.querySelector(".dropdawn-menu__input");
 
-  function openMenu() {
+  let chooseElement;
+
+  function openCloseMenu() {
+    chooseElement = -1;
     menuList.classList.toggle("open-menu");
     menuTitle.classList.toggle("title-pressed");
 
+    setAriaHeaderAttributes()
+  }
+
+  function setAriaHeaderAttributes() {
     if (menuTitle.classList.contains("title-pressed")) {
       menuTitle.setAttribute("aria-expanded", "true");
       menuList.setAttribute("aria-hidden", "false");
@@ -19,11 +26,11 @@ dropdawns.forEach((dropdawnWrapper) => {
     }
   }
 
-  function processingSelectedItem(evant) {
-    evant.stopPropagation();
-    menuTitle.innerText = evant.target.innerText;
-    markItem(evant.target);
-    gettingValue(evant.target);
+  function processingSelectedItem(event) {
+    event.stopPropagation();
+    menuTitle.innerText = event.target.innerText;
+    markItem(event.target);
+    gettingValue(event.target);
     closeDropdawnMenu();
   }
 
@@ -47,26 +54,40 @@ dropdawns.forEach((dropdawnWrapper) => {
   function closeDropdawnMenu() {
     menuList.classList.remove("open-menu");
     menuTitle.classList.remove("title-pressed");
-    menuTitle.setAttribute("aria-expanded", "false");
-    menuList.setAttribute("aria-hidden", "true");
+    setAriaHeaderAttributes()
   }
 
-  function clickOutsideDropdawn(evant) {
-    if (evant.target !== menuTitle) {
+  function clickOutsideDropdawn(event) {
+    if (event.target !== menuTitle) {
       closeDropdawnMenu();
     }
   }
 
-  function keyboardActions(evant) {
-    if (evant.key === "Enter") {
-      processingSelectedItem(evant);
+  function keyboardActions(event) {
+    if (event.key === "Enter") {
+      processingSelectedItem(event);
     }
-    if (evant.key === "Escape") {
+    if (event.key === "Escape") {
       closeDropdawnMenu();
     }
   }
 
-  menuTitle.addEventListener("click", openMenu);
+  function navigationUpDown(event) {
+    if (!menuList.classList.contains("open-menu")) return;
+
+    event.preventDefault()
+
+    if ((event.key === "ArrowDown") && (chooseElement < listItems.length - 1)) {
+      chooseElement++;
+      listItems[chooseElement].focus();
+    }
+    if ((event.key === "ArrowUp") && chooseElement) {
+      chooseElement--;
+      listItems[chooseElement].focus();
+    }
+  }
+
+  menuTitle.addEventListener("click", openCloseMenu);
 
   listItems.forEach((listItem) => {
     listItem.addEventListener("click", processingSelectedItem);
@@ -75,4 +96,6 @@ dropdawns.forEach((dropdawnWrapper) => {
   document.addEventListener("click", clickOutsideDropdawn);
 
   dropdawnWrapper.addEventListener("keydown", keyboardActions);
+
+  dropdawnWrapper.addEventListener("keydown", navigationUpDown);
 });

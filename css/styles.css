@@ -84,7 +84,7 @@ body {
   border-radius: 0 0 8px 8px;
   box-shadow: 0px 4px 8px 0px var(--color-dark);
 
-  transition: all 0.2s ease;
+  transition: line-height 0.3s ease, opacity 0.3s, visibility 0.1s;
 
   z-index: 100;
 
