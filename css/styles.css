@@ -111,11 +111,6 @@ body {
   border-bottom: 1px solid var(--color-dark);
 }
 
-.dropdawn-menu__input {
-  display: none;
-  margin-left: 400px;
-}
-
 .dropdawn-menu__item:hover,
 .dropdawn-menu__item:focus-visible {
   outline: none;

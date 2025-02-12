@@ -4,7 +4,6 @@ dropdawns.forEach((dropdawnWrapper) => {
   const menuTitle = dropdawnWrapper.querySelector(".dropdawn-menu__title");
   const menuList = dropdawnWrapper.querySelector(".dropdawn-menu__list");
   const listItems = menuList.querySelectorAll(".dropdawn-menu__item");
-  const dropdawnInput = dropdawnWrapper.querySelector(".dropdawn-menu__input");
 
   let chooseElement;
 
@@ -30,7 +29,6 @@ dropdawns.forEach((dropdawnWrapper) => {
     event.stopPropagation();
     menuTitle.innerText = event.target.innerText;
     markItem(event.target);
-    gettingValue(event.target);
     closeDropdawnMenu();
   }
 
@@ -47,13 +45,9 @@ dropdawns.forEach((dropdawnWrapper) => {
     });
   }
 
-  function gettingValue(item) {
-    dropdawnInput.value = item.dataset.value;
-  }
-
   function closeDropdawnMenu() {
     menuList.classList.remove("open-menu");
-    menuTitle.classList.remove("title-pressed");
+    menuTitle.classList.remove("title-pressed", "selected-item");
     setAriaHeaderAttributes()
   }
 
@@ -75,7 +69,7 @@ dropdawns.forEach((dropdawnWrapper) => {
   function navigationUpDown(event) {
     if (!menuList.classList.contains("open-menu")) return;
 
-    event.preventDefault()
+    event.preventDefault();
 
     if ((event.key === "ArrowDown") && (chooseElement < listItems.length - 1)) {
       chooseElement++;
